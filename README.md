@@ -1,5 +1,18 @@
 # s3-sync
 
+> **⚠️ Archived: this project is no longer maintained. Please don't use it for real data.**
+>
+> Known problems in 0.1.1, which will not be fixed:
+> * Only the first 1000 objects of a bucket are listed, so larger buckets are copied partially, without any warning.
+> * Errors inside the worker threads are swallowed: a file can fail to copy while the run still looks successful.
+> * Nested folders are listed several times when syncing from local storage, and nested keys fail when syncing to it.
+> * Every run copies everything (no incremental sync, no deletes), and `--sync-... false` is read as true.
+>
+> Use one of these instead, which cover s3 → s3, s3 → local and local → s3:
+> * [`aws s3 sync`](https://docs.aws.amazon.com/cli/latest/reference/s3/sync.html), the official AWS CLI
+> * [rclone](https://rclone.org/), for S3 and many other storages (MinIO, R2, GCS, ...)
+> * [s5cmd](https://github.com/peak/s5cmd), for very large numbers of files
+
 Sync AWS S3 storage:
 * Sync file from s3 -> s3
 * Sync file from s3 -> local storage
